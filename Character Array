@@ -1,0 +1,59 @@
+#include <stdio.h>
+#define SIZE 10
+#include <string.h>
+
+void display(char str1[])
+{
+	int i;
+	
+	printf("\n");
+	for(i = 0; str1[i] != '\0'; i++)
+		printf("%c ", str1[i]);
+}
+
+//Counts the number of chars in an array
+int countAs(char str1[])
+{
+	int i, count = 0;
+	
+	for(i = 0; str1[i] != '\0'; i++)
+		if(str1[i] == 'a' || str1[i] == 'A')
+			count++;
+			
+	return count;
+}
+
+//Word that reads the same forward and backwards
+int palindrome(char str1[])
+{
+	//Serves us the low variable
+	int i;
+	
+	//Length of the string
+	int length = strlen(str1) - 1;
+	
+	for(i = 0; str1[i] != '\0'; i++)
+		if(str1[i] == str1[length--])
+		{
+			return 1;
+			break;
+		}
+			
+	
+	return 0;
+}
+
+int main(int argc, int *argv[])
+{
+	char str1[SIZE];
+	
+	//Gets the char of your choice
+	gets(str1);
+	display(str1);
+	printf("\nNumber of A's: %d", countAs(str1));
+	strlen(str1);
+	printf("\nLength of the string: %d", strlen(str1));
+	printf("\nReturn value: %d", palindrome(str1));
+	
+	return 0;
+}
