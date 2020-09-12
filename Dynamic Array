@@ -250,6 +250,6 @@ int main()
 		system("pause");
 	}
 	free(answer);
-		
+
 	return 0;
 }
