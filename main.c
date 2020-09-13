@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 				}
 				else
 					printf("Invalid choice");
-				break;
+				break; 
 			case 2:
 				printf("Union: ");
 				getUnion(s1, s2);
