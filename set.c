@@ -89,7 +89,7 @@ Set add(Set s, int elem)
 
 
 
-void getUnion(Set s1, Set s2)
+Set getUnion(Set s1, Set s2)
 {
 	Set result = initialize();
  	
@@ -111,11 +111,10 @@ void getUnion(Set s1, Set s2)
 		ptr=ptr->next;
 	}
 	
-	Set s3 = result;
-	display(s3);
+	return result;
 }
 
-void intersection(Set result, Set s1, Set s2)
+Set intersection(Set result, Set s1, Set s2)
 {
     nodeptr ptemp, qtemp, itemp, irear, ifront;
  
@@ -157,12 +156,11 @@ void intersection(Set result, Set s1, Set s2)
         ptemp = ptemp->next;
     }
     
-    Set s3 = result;
-    display(s3);
+    return result;
 }
 
 
-void difference(Set result, Set s1, Set s2)
+Set difference(Set result, Set s1, Set s2)
 {
 	result = initialize();
 	
@@ -195,11 +193,10 @@ void difference(Set result, Set s1, Set s2)
 		ptemp = ptemp->next;
 	}
 	
-	Set s3 = result;
-	display(s3);
+	return result;
 }
 
-void symmetricdifference(Set result, Set s1, Set s2)
+Set symmetricdifference(Set result, Set s1, Set s2)
 {
 	result = initialize();
 	
@@ -225,8 +222,7 @@ void symmetricdifference(Set result, Set s1, Set s2)
 		}
 	}
 	
-	Set s3 = result;
-	display(s3);
+	return result;
 }
 
 int subset(Set s1, Set s2)
