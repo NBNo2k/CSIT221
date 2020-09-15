@@ -61,20 +61,24 @@ int main(int argc, char *argv[])
 					printf("Invalid choice");
 				break; 
 			case 2:
+				s3 = getUnion(s1, s2);
 				printf("Union: ");
-				getUnion(s1, s2);
+				display(s3);
 				break;
 			case 3:
+				s3 = intersection(result, s1, s2);
 				printf("Intersection: ");
-				intersection(result, s1, s2);
+				display(s3);
 				break;
 			case 4:
+				s3 = difference(result, s1, s2);
 				printf("Difference: ");
-				difference(result, s1, s2);
+				display(s3);
 				break;
 			case 5:
+				s3 = symmetricdifference(result, s1, s2);
 				printf("Symmetric Difference: ");
-				symmetricdifference(result, s1, s2);
+				display(s3);
 				break;
 			case 6:
 				if(subset(s1, s2) == 1)
