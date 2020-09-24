@@ -15,9 +15,10 @@ typedef struct node{
 }STACK_NODE;
 
 Stack newStack();
-void freeStack(Stack s);
-void push(Stack s, stackItem item);			//Insert at the top
-void pop(Stack s);							//Deleting the top element
-stackItem stackTop(Stack s);				//returns the top item
+void freeStack(Stack s);	
+void push(Stack s, stackItem item);					//Insert at the top
+void pop(Stack s);									//Deleting the top element
+stackItem stackTop(Stack s);						//returns the top item
 int isEmpty(Stack s);
 void display(Stack s);
+int parenthesesPair(char opening, char closing);	//Checks paired symbols
