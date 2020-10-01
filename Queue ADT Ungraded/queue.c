@@ -3,7 +3,7 @@
 #include "queue.h"
 
 Queue createQueue(){
-	Queue q = (Queue)malloc(sizeof(QUEUE_NODE));
+	Queue q = (Queue)malloc(sizeof(QUEUE_HEAD));
 	q->front = q->rear = NULL;
 	q->count = 0;
 	return q;
