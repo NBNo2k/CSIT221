@@ -2,53 +2,70 @@
 #include <stdlib.h>
 #include "queue.h"
 
-Queue createQueue(){
+Queue createQueue()
+{
 	Queue q = (Queue)malloc(sizeof(QUEUE_HEAD));
+	
 	q->front = q->rear = NULL;
 	q->count = 0;
+	
 	return q;
 }
 
-Nodeptr createNode(int item){
+Nodeptr createNode(int item)
+{
 	Nodeptr ptr;
-	ptr=(Nodeptr)malloc(sizeof(QUEUE_NODE));
-	ptr->data=item;
-	ptr->next=NULL;
+	
+	ptr = (Nodeptr)malloc(sizeof(QUEUE_NODE));
+	ptr->data = item;
+	ptr->next = NULL;
+	
 	return ptr;
 }
 
-void enqueue(Queue q, int item){
+void enqueue(Queue q, int item)
+{
 	Nodeptr temp;
 	temp = createNode(item);
+	
+	
 	if(isEmpty(q))
 		q->front = temp;
 	else
 		q->rear->next = temp;
+	
 	q->rear = temp;
 	q->count++;
 }
 
-void dequeue(Queue q){
+void dequeue(Queue q)
+{
 	Nodeptr temp;
 	temp = q->front;
-	if(q->count==1)
-		q->rear = NULL;
-	q->front = q->front->next;
+	
+	if(q->count == 1)
+		temp = q->rear = NULL;
+	
+	q->front = temp->next;
 	temp->next = NULL;
 	free(temp);
 	q->count--;
 }
 
-void display(Queue q){
+void display(Queue q)
+{
 	Nodeptr ptr = q->front;
-	while(ptr!=NULL){
+	
+	while(ptr!=NULL)
+	{
 		printf("%d ",ptr->data);
 		ptr = ptr->next;
 	}
 	printf("\n");
 }
 
-int isEmpty(Queue q){
+int isEmpty(Queue q)
+{
 	return q->count==0;	
 }
 
