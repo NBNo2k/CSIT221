@@ -1,4 +1,3 @@
-typedef int stackItem;
 typedef struct node* Nodeptr;
 
 typedef struct
@@ -9,25 +8,6 @@ typedef struct
 
 typedef STACK_HEAD* Stack;
 
-
-typedef struct node
-{
-	stackItem data;
-	Nodeptr next;
-}STACK_NODE;
-
-Stack newStack();
-void push(Stack s, stackItem item);	
-int pop(Stack s);					//Return the value before free 
-void displayStack(Stack s);
-int isEmptyStack(Stack s);
-
-typedef struct 
-{
-	int data;
-	Nodeptr next;
-}QUEUE_NODE;
-
 typedef struct
 {
 	Nodeptr front;
@@ -35,10 +15,25 @@ typedef struct
 	Nodeptr rear;
 }QUEUE_HEAD;
 
+
 typedef QUEUE_HEAD* Queue;
 
-Queue createQueue();
+typedef struct node					//Nodes for both stack and queue
+{
+	int data;
+	Nodeptr next;
+}NODE;
+
+//Stack
+Stack newStack();
+void push(Stack s, int item);	
+int pop(Stack s);					//Return the value before free 
+void displayStack(Stack s);
+int isEmptyStack(Stack s);	
+
+//Queue
+Queue newQueue();
 void enqueue(Queue q, int item);
 int dequeue(Queue q);				//Return the value before free 
 void displayQueue(Queue q);
-int isEmptyQueue(Queue q);
+int isEmptyQueue(Queue q);			

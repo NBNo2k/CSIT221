@@ -6,12 +6,15 @@
 
 int main(int argc, char *argv[]) 
 {
-	stackItem data;
+	int data;
 	int choice, repeat;
 	char x;
 	
-	Stack s = newStack();
-	Queue q = createQueue();
+	Stack stackInput = newStack();
+	Stack stackOutput = newStack();
+	
+	Queue queueInput = newQueue();
+	Queue queueOutput = newQueue();
 	
 	do
 	{
@@ -27,25 +30,28 @@ int main(int argc, char *argv[])
 			case 1:
 				printf("Item: ");
 				scanf("%d", &data);
-				push(s, data);
-				enqueue(q, data);
+				push(stackInput, data);
+				enqueue(queueInput, data);
 				break;
 			case 2:
-				if(pop(s));
-					enqueue(q, data);
-				if(dequeue(q));
-					push(s, data);
+				if(isEmptyStack(stackInput) && isEmptyQueue(queueInput))
+				{
+					displayStack(stackOutput);
+					displayQueue(queueOutput);
+				}	
+				else
+				{
+					//Queue to stack
+					push(stackOutput, dequeue(queueInput));
+					
+					//Stack to queue
+					enqueue(queueOutput, pop(stackInput));
+				}
 				break;
 			default:
 				printf("\nInvalid input");
 				getch(x);
-		}
-		if(isEmptyStack(s) && isEmptyQueue(q))
-		{
-			displayStack(s);
-			displayQueue(q);
-		}
-		
+		}	
 		printf("\nDo you wish to continue (1/0)? ");
 		scanf("%d", &repeat);
 	}
