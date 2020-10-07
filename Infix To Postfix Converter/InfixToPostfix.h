@@ -26,4 +26,4 @@ int order(char item);
 void freeStack(Stack s);
 int operand(char item);		//Check operands
 int Operator(char item);	//Check operators
-void InfixToPostfix(stackItem infix[], stackItem postfix[];);
+int InfixToPostfix(stackItem infix[], stackItem postfix[];);

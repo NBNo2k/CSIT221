@@ -109,7 +109,7 @@ int Operator(char item)
 	return (item == '*' ) || (item == '/') || (item == '%') || (item == '+') || (item == '-') || (item == '<') || (item == '>') || (item == '!');
 }
 
-void InfixToPostfix(stackItem infix[], stackItem postfix[])
+int InfixToPostfix(stackItem infix[], stackItem postfix[])
 {
 	int i, j;
 	infix[100];
@@ -156,4 +156,6 @@ void InfixToPostfix(stackItem infix[], stackItem postfix[])
 	}
 		
 	postfix[j++] = '\0';
+	
+	return postfix[j];
 }
