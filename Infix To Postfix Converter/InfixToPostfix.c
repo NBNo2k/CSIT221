@@ -174,7 +174,7 @@ int PostfixEvaluation(stackItem postfix[], int retVal)
 		else
 		{
 			int temp = pop(s);
-			int b = pop(s);
+			int b = stackTop(s);
 			
 			switch(postfix[i])
 			{
