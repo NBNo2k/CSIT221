@@ -20,10 +20,10 @@ Stack newStack();
 void push(Stack s, stackItem item);
 void pop(Stack s);
 int isEmpty(Stack s);
-void display(Stack s);
 stackItem stackTop(Stack s);
+
 int order(char item);
 void freeStack(Stack s);
 int operand(char item);		//Check operands
 int Operator(char item);	//Check operators
-void InfixToPostfix(stackItem infix[], stackItem postfix[];);
+int InfixToPostfix(stackItem infix[], stackItem postfix[];);
