@@ -109,68 +109,51 @@ int Operator(char item)
 	return (item == '*' ) || (item == '/') || (item == '%') || (item == '+') || (item == '-') || (item == '<') || (item == '>') || (item == '!');
 }
 
-void display(Stack s)
-{
-	Nodeptr ptr = s->top;
-	
-	if(isEmpty(s) == 1)
-		printf("Stack is empty.\n");
-	else
-	{
-		printf("Remaining symbols: ");
-		while(ptr != NULL)
-		{
-			printf("%c ", ptr->data);
-			ptr = ptr->next;
-		}
-	}
-	printf("\n");
-}
-
 void InfixToPostfix(stackItem infix[], stackItem postfix[])
 {
 	int i, j;
 	infix[100];
 	postfix[100];
 	Stack s = newStack();
+	
 	//Traverse
-		for(i = 0, j = 0; infix[i]; i++)
+	for(i = 0, j = 0; infix[i]; i++)
+	{
+		//Directly add to Postfix if operand
+		if(operand(infix[i]))
+			postfix[j++] = infix[i];
+		else
 		{
-			//Directly add to Postfix if operand
-			if(operand(infix[i]))
-				postfix[j++] = infix[i];
-			else
+			if(Operator(infix[i]))
 			{
-				if(Operator(infix[i]))
+				//Addto postfix if stack is empty
+				if(isEmpty(s))
+					push(s, infix[i]);
+				else
 				{
-					//Addto postfix if stack is empty
-					if(isEmpty(s))
+					//Push higher precedence
+					if(order(infix[i]) > order(stackTop(s)))
 						push(s, infix[i]);
 					else
 					{
-						//Push higher precedence
-						if(order(infix[i]) > order(stackTop(s)))
-							push(s, infix[i]);
-						else
+						//Pop if lower precedence
+						while(!isEmpty(s) && order(infix[i]) <= order(stackTop(s)))
 						{
-							//Pop if lower precedence
-							while(!isEmpty(s) && order(infix[i]) <= order(stackTop(s)))
-							{
-								postfix[j++] = stackTop(s);
-								pop(s);
-							}
-							push(s, infix[i]);
-						}	
-					}
+							postfix[j++] = stackTop(s);
+							pop(s);
+						}
+						push(s, infix[i]);
+					}	
 				}
 			}
 		}
+	}
 		
-		while(!isEmpty(s))
-		{
-			postfix[j++] = stackTop(s);
-			pop(s);
-		}
+	while(!isEmpty(s))
+	{
+		postfix[j++] = stackTop(s);
+		pop(s);
+	}
 		
-		postfix[j++] = '\0';
+	postfix[j++] = '\0';
 }

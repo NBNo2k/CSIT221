@@ -11,8 +11,6 @@ int main(int argc, char *argv[])
 	int choice  = 1, i, j = 0;
 	stackItem postfix[100];
 	
-	
-	
 	do
 	{
 		Stack s = newStack();
