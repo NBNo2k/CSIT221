@@ -50,7 +50,7 @@ void push(Stack s, stackItem item)
 	s->count++;
 }
 
-void pop(Stack s)
+char pop(Stack s)
 {
 	Nodeptr temp;
 	
@@ -109,7 +109,7 @@ int Operator(char item)
 	return (item == '*' ) || (item == '/') || (item == '%') || (item == '+') || (item == '-') || (item == '<') || (item == '>') || (item == '!');
 }
 
-void InfixToPostfix(stackItem infix[], stackItem postfix[])
+int InfixToPostfix(stackItem infix[], stackItem postfix[])
 {
 	int i, j;
 	infix[100];
@@ -156,4 +156,47 @@ void InfixToPostfix(stackItem infix[], stackItem postfix[])
 	}
 		
 	postfix[j++] = '\0';
+	
+	return postfix[j];
+}
+
+int PostfixEvaluation(stackItem postfix[], int retVal)
+{
+	Stack s = newStack();
+	int i;
+	retVal = 0;
+	
+	for(i = 0; postfix[i]; i++)
+	{
+		if(isdigit(postfix[i]))
+			push(s, postfix[i] - '0');
+			
+		else
+		{
+			int temp = pop(s);
+			int b = pop(s);
+			
+			switch(postfix[i])
+			{
+				case '+':
+					retVal = b + temp;
+					push(s, retVal);
+					break;
+				case '-':
+					retVal = b - temp;
+					push(s, retVal);
+					break;
+				case '*':
+					retVal = b * temp;
+					push(s, retVal);
+					break;
+				case '/':
+					retVal = b / temp;
+					push(s, retVal);
+					break;
+			}
+		}
+	}
+	
+	return stackTop(s);
 }
