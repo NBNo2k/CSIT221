@@ -83,6 +83,7 @@ void freeStack(Stack s)
         temp->next = NULL;
         free(temp);
 	}
+	
 	s->top = top_ref;
 	s->count = 0;
 }
