@@ -26,29 +26,9 @@ Nodeptr createNode(char item)
 	return ptr;
 } 
 
-void freeStack(Stack s)
+stackItem stackTop(Stack s)
 {
-	Nodeptr temp = NULL;
-	Nodeptr top_ref = s->top;
-	
-	while(top_ref != NULL)
-	{
-		temp = top_ref;
-        top_ref = top_ref->next;
-        temp->next = NULL;
-        free(temp);
-	}
-	s->top = top_ref;
-	s->count = 0;
-}
-
-void push(Stack s, stackItem item)
-{
-	Nodeptr temp = createNode(item);
-	
-	temp->next = s->top;
-	s->top = temp;
-	s->count++;
+	return s->top->data;
 }
 
 stackItem pop(Stack s)
@@ -66,14 +46,50 @@ stackItem pop(Stack s)
 	return item;
 }
 
+void push(Stack s, stackItem item)
+{
+	Nodeptr temp = createNode(item);
+	
+	temp->next = s->top;
+	s->top = temp;
+	s->count++;
+}
+
+void display(Stack s)
+{
+    Nodeptr ptr = s->top;
+    
+	if (!isEmpty(s))
+    {
+        printf("\nResult: ");
+        while (ptr != NULL)
+        {
+            printf("%d ", ptr->data);
+            ptr = ptr->next;
+        }
+    }
+    printf("\n");
+}
+
+void freeStack(Stack s)
+{
+	Nodeptr temp = NULL;
+	Nodeptr top_ref = s->top;
+	
+	while(top_ref != NULL)
+	{
+		temp = top_ref;
+        top_ref = top_ref->next;
+        temp->next = NULL;
+        free(temp);
+	}
+	s->top = top_ref;
+	s->count = 0;
+}
+
 int isEmpty(Stack s)
 {
 	return s->count == 0;
-}
-
-stackItem stackTop(Stack s)
-{
-	return s->top->data;
 }
 
 int order(char item)
@@ -104,30 +120,10 @@ int order(char item)
 	return flag;
 }
 
-int operand(char item)
-{
-	return (item >= 'a' && item <= 'z') || (item >= 'A' && item <= 'Z');
-}
 
 int Operator(char item)
 {
 	return (item == '*' ) || (item == '/') || (item == '%') || (item == '+') || (item == '-') || (item == '<') || (item == '>') || (item == '!');
-}
-
-void display(Stack s)
-{
-    Nodeptr ptr = s->top;
-    
-	if (!isEmpty(s))
-    {
-        printf("\nResult: ");
-        while (ptr != NULL)
-        {
-            printf("%d ", ptr->data);
-            ptr = ptr->next;
-        }
-    }
-    printf("\n");
 }
 
 float evaluatePostfixString(float a, float b, int postfix)
