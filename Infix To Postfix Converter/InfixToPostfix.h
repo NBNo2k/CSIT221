@@ -17,12 +17,13 @@ typedef struct node
 
 Stack newStack();
 void push(Stack s, stackItem item);
-char pop(Stack s);
+stackItem pop(Stack s);
 int isEmpty(Stack s);
 stackItem stackTop(Stack s);
+void display(Stack s);
 
+//Helper functions
 int order(char item);
 void freeStack(Stack s);
 int Operator(char item);	
-int InfixToPostfix(stackItem infix[], stackItem postfix[]);
-int PostfixEvaluation(stackItem postfix[], int retVal);
+float evaluatePostfixString(float a, float b, int postfix);

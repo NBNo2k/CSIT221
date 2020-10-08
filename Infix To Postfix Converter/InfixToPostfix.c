@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "InfixToPostfix.h"
 #include <string.h>
+#include <ctype.h>
+#include "InfixToPostfix.h"
 
 Stack newStack()
 {
@@ -50,15 +51,19 @@ void push(Stack s, stackItem item)
 	s->count++;
 }
 
-char pop(Stack s)
+stackItem pop(Stack s)
 {
 	Nodeptr temp;
+	stackItem item;
 	
 	temp = s->top;
+	item = temp->data;
 	s->top = temp->next;
 	temp->next = NULL;
 	free(temp);
 	s->count--;
+	
+	return item;
 }
 
 int isEmpty(Stack s)
@@ -109,94 +114,41 @@ int Operator(char item)
 	return (item == '*' ) || (item == '/') || (item == '%') || (item == '+') || (item == '-') || (item == '<') || (item == '>') || (item == '!');
 }
 
-int InfixToPostfix(stackItem infix[], stackItem postfix[])
+void display(Stack s)
 {
-	int i, j;
-	infix[100];
-	postfix[100];
-	Stack s = newStack();
-	
-	//Traverse
-	for(i = 0, j = 0; infix[i]; i++)
-	{
-		//Directly add to Postfix if operand
-		if(operand(infix[i]))
-			postfix[j++] = infix[i];
-		else
-		{
-			if(Operator(infix[i]))
-			{
-				//Addto postfix if stack is empty
-				if(isEmpty(s))
-					push(s, infix[i]);
-				else
-				{
-					//Push higher precedence
-					if(order(infix[i]) > order(stackTop(s)))
-						push(s, infix[i]);
-					else
-					{
-						//Pop if lower precedence
-						while(!isEmpty(s) && order(infix[i]) <= order(stackTop(s)))
-						{
-							postfix[j++] = stackTop(s);
-							pop(s);
-						}
-						push(s, infix[i]);
-					}	
-				}
-			}
-		}
-	}
-		
-	while(!isEmpty(s))
-	{
-		postfix[j++] = stackTop(s);
-		pop(s);
-	}
-		
-	postfix[j++] = '\0';
-	
-	return postfix[j];
+    Nodeptr ptr = s->top;
+    
+	if (!isEmpty(s))
+    {
+        printf("\nResult: ");
+        while (ptr != NULL)
+        {
+            printf("%d ", ptr->data);
+            ptr = ptr->next;
+        }
+    }
+    printf("\n");
 }
 
-int PostfixEvaluation(stackItem postfix[], int retVal)
+float evaluatePostfixString(float a, float b, int postfix)
 {
-	Stack s = newStack();
-	int i;
-	retVal = 0;
+	float retVal = 0;
 	
-	for(i = 0; postfix[i]; i++)
+	switch(postfix)
 	{
-		if(isdigit(postfix[i]))
-			push(s, postfix[i] - '0');
-			
-		else
-		{
-			int temp = pop(s);
-			int b = stackTop(s);
-			
-			switch(postfix[i])
-			{
-				case '+':
-					retVal = b + temp;
-					push(s, retVal);
-					break;
-				case '-':
-					retVal = b - temp;
-					push(s, retVal);
-					break;
-				case '*':
-					retVal = b * temp;
-					push(s, retVal);
-					break;
-				case '/':
-					retVal = b / temp;
-					push(s, retVal);
-					break;
-			}
-		}
+		case '+':
+			retVal = a + b;
+			break;
+		case '-':
+			retVal = a - b;
+			break;
+		case '*':
+			retVal = a * b;
+			break;
+		case '/':
+			retVal = a / b;
+			break;
 	}
 	
-	return stackTop(s);
+	return retVal;
 }
