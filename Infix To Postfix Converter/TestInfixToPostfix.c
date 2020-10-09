@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 			{
 				if(Operator(infix[i]))
 				{
-					//Addto postfix if stack is empty
+					//Add to postfix if stack is empty
 					if(isEmpty(postfixString))
 						push(postfixString, infix[i]);
 					else
