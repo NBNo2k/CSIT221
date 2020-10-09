@@ -234,14 +234,26 @@ List deleteAt(List head, int pos)	//Ungraded Excercise
 	Nodeptr nextnode;
 	int i;
 	
-	for(i = 1; i < pos - 1; i++)
-		temp = temp->next;
+	if(head == NULL)
+		return;
 	
-	nextnode = temp->next;
-	temp->next = nextnode->next;
-	free(nextnode);
-
-	return head;
+	//Delete head
+	if(pos == 0)
+	{
+		head = temp->next;
+		free(temp);
+		return;
+	}
+	
+	//Store previous node	
+	for(i = 1; temp != NULL && i < pos-1; i++)
+		temp = temp->next;
+		
+	if(temp == NULL || temp->next == NULL)
+		return;
+		
+	//Delete node at pos-1
+	nextnode = temp->next->next;
+	free(temp->next);
+	temp->next = nextnode;
 }
-
-

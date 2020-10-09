@@ -22,8 +22,11 @@ int main(int argc, char *argv[]) {
 	int pos;
 	printf("Delete position: ");
 	scanf("%d", &pos);
-	head = deleteAt(head, pos);
-	display(head);
+
+	if(deleteAt(head, pos))
+		display(head);
+	else
+		printf("Position entered exceeds the data size");
 	
 	/*List head = createList();
 	display(head);
@@ -40,7 +43,6 @@ int main(int argc, char *argv[]) {
 	printf("Item found = %d", findItem(head, item));
 	printf("\nMinumum = %d", findMin(head));
 	printf("\nMaximum = %d", findMax(head));*/
-	
 	
 	return 0;
 }
