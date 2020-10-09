@@ -83,10 +83,18 @@ void freeStack(Stack s)
         temp->next = NULL;
         free(temp);
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> ed1a1612f07ae1a3b611bbd6080f797e2dd76c08
 	s->top = top_ref;
 	s->count = 0;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ed1a1612f07ae1a3b611bbd6080f797e2dd76c08
 int isEmpty(Stack s)
 {
 	return s->count == 0;
@@ -120,7 +128,10 @@ int order(char item)
 	return flag;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed1a1612f07ae1a3b611bbd6080f797e2dd76c08
 int Operator(char item)
 {
 	return (item == '*' ) || (item == '/') || (item == '%') || (item == '+') || (item == '-') || (item == '<') || (item == '>') || (item == '!');
